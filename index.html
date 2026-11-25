@@ -267,6 +267,17 @@ input.txt{width:100%;font:inherit;color:var(--ink);background:var(--paper);borde
 
 <script>
 (function(){
+/* iPhone ignores the CSS/viewport zoom hints in home-screen mode, so stop double-tap and pinch zoom here.
+   A second tap within 350ms would zoom; cancel it and deliver the tap as a normal click instead. */
+let lastTap=0;
+document.addEventListener('touchend',e=>{
+  const t=e.target; if(!(t instanceof Element)||t.closest('input,textarea,select')) return;
+  const n=Date.now();
+  if(n-lastTap<350&&e.changedTouches.length===1){ e.preventDefault(); const c=t.closest('button,label,a,[data-date]'); if(c) c.click(); }
+  lastTap=n;
+},{passive:false});
+document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
+['gesturestart','gesturechange'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
 const DEFAULT_CATS=[
   {id:'work',name:'일',color:'#1f7aff',icon:'work'},{id:'study',name:'공부',color:'#8a3cff',icon:'study'},
   {id:'exercise',name:'운동',color:'#14c25a',icon:'exercise'},{id:'people',name:'사람',color:'#ff3b6b',icon:'people'},
