@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>오늘 한 일</title>
 <meta name="theme-color" content="#f4f4f2">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -38,6 +38,10 @@
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
+/* phone: no double-tap zoom on taps, no auto-zoom when a text box gets focus */
+html,body,button,label,input,textarea,.day{touch-action:manipulation}
+button,.day{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+@media (max-width:640px){input,textarea{font-size:16px!important}}
 body{background:var(--page);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
 .wrap{max-width:1020px;margin:0 auto;display:grid;gap:18px}
