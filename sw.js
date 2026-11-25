@@ -1,5 +1,5 @@
 // 오프라인에서도 열리도록 앱 파일을 저장해 둔다. 파일을 바꾸면 VERSION을 올린다.
-const VERSION='daylog-v6';
+const VERSION='daylog-v7';
 const FILES=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png','apple-touch-icon.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
